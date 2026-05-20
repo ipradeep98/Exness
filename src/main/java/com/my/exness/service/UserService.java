@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    private UserRepo userRepo;;
+    private UserRepo userRepo;
     @Autowired
     private AuthenticationManager authManager;
     @Autowired
@@ -31,9 +31,9 @@ public class UserService {
         Authentication authentication =
                 authManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
-                                user.getUsername(), user.getPassword()));
+                                user.getUserName(), user.getPassword()));
         if(authentication.isAuthenticated()){
-            return jwtUtil.generateToken(user.getUsername());
+            return jwtUtil.generateToken(user.getUserName());
         } else {
             return "User is not authenticated";
         }

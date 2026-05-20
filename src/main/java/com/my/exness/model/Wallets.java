@@ -1,0 +1,33 @@
+package com.my.exness.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "wallets")
+@Getter
+@Setter
+public class Wallets {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
+
+    private String asset;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal available;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal locked;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+}
